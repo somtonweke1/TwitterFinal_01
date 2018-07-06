@@ -24,7 +24,7 @@
 
 -(void)beginRefresh{
     [self fetchTimeline];
-    NSLog(@"Hey");
+    
 }
 
 
