@@ -23,6 +23,7 @@
 @implementation TimelineViewController
 
 -(void)beginRefresh{
+    //get data
     [self fetchTimeline];
     
 }
