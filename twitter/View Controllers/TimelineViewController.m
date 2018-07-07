@@ -12,15 +12,27 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "TweetCell.h"
+#import "ComposeViewController.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) NSArray *timelineTweets;
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray *timelineTweets;
 @property (nonatomic,strong)  UIRefreshControl*refreshControl;
 
 
 @end
 
 @implementation TimelineViewController
+
+- (void)didTweet:(Tweet *)tweet{
+    
+    [self.timelineTweets addObject:tweet];
+    [self.tableView reloadData];
+    
+}
+
+
+
 
 -(void)beginRefresh{
     //get data
@@ -96,5 +108,11 @@
 }
 */
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    composeController.delegate = self;
+}
 
 @end
+
